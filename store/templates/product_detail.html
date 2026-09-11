@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            {% if product.img_link %}
+            <img src="{{ product.img_link }}" class="img-fluid" alt="{{ product.product_name }}">
+            {% endif %}
+
+            {% if product.gallery_images.all %}
+            <div class="row mt-3">
+                {% for product_image in product.gallery_images.all %}
+                <div class="col-4 mb-3">
+                    <img src="{{ product_image.image.url }}" class="img-fluid border" alt="{{ product_image.alt_text|default:product.product_name }}">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h2>{{ product.product_name }}</h2>
+            <p class="text-muted">{{ product.category.name }}</p>
+            <p>{{ product.about_product }}</p>
+
+            <h4>Rs. {{ product.discounted_price }}</h4>
+            <p class="text-muted">
+                <del>Rs. {{ product.actual_price }}</del>
+                {{ product.discount_percentage }}% off
+            </p>
+
+            {% if product.rating %}
+            <p>Rating: {{ product.rating }} ({{ product.rating_count }})</p>
+            {% endif %}
+
+            <a href="{% url 'store:checkout' product.id %}" class="btn btn-success mt-3">Buy Now</a>
+
+            {% if product.product_link %}
+            <a href="{{ product.product_link }}" target="_blank" class="btn btn-outline-secondary mt-3">
+                View Original
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

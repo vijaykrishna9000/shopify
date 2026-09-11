@@ -1,0 +1,312 @@
+/* ---------- Tokens ---------- */
+:root {
+  --ink: #12131a;
+  --ink-soft: #2a2d3a;
+  --paper: #eef0f4;
+  --surface: #ffffff;
+  --accent: #4b3aff;
+  --accent-ink: #ffffff;
+  --deal: #f5c34d;
+  --deal-ink: #12131a;
+  --muted: #6b7280;
+  --border: #e2e4ea;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .brand, .navbar-brand {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+}
+
+a { text-decoration: none; }
+
+/* ---------- Navbar ---------- */
+.site-nav {
+  background: var(--ink);
+  padding: 0.85rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.site-nav .navbar-brand {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.site-nav .nav-link {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem !important;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.site-nav .nav-link:hover,
+.site-nav .nav-link.active {
+  color: #ffffff !important;
+}
+
+.site-nav .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.15rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.site-nav .dropdown-menu {
+  background: var(--ink-soft);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.site-nav .dropdown-item {
+  color: rgba(255, 255, 255, 0.78);
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.site-nav .dropdown-item:hover,
+.site-nav .dropdown-item.active {
+  background: rgba(75, 58, 255, 0.25);
+  color: #ffffff;
+}
+
+.site-nav .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-auth-outline {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  background: transparent;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-size: 0.88rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.btn-auth-outline:hover { border-color: #ffffff; color: #ffffff; }
+
+.btn-auth-filled {
+  background: var(--accent);
+  color: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-size: 0.88rem;
+  transition: filter 0.15s ease;
+}
+
+.btn-auth-filled:hover { filter: brightness(1.1); color: #ffffff; }
+
+/* ---------- Hero ---------- */
+.catalog-hero {
+  padding: 2.75rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.catalog-hero h1 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.catalog-hero p {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* ---------- Product grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  padding: 2rem 0 3rem;
+}
+
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px rgba(18, 19, 26, 0.08);
+}
+
+.product-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #f4f5f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.75rem;
+}
+
+.deal-badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  background: var(--deal);
+  color: var(--deal-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.product-body {
+  padding: 0.9rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em;
+}
+
+.product-rating {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.product-rating .star { color: var(--deal); }
+
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.product-price-original {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.btn-view {
+  margin-top: auto;
+  background: var(--ink);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  transition: background 0.15s ease;
+}
+
+.btn-view:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.empty-state {
+  padding: 4rem 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Product detail ---------- */
+.detail-media {
+  background: #f4f5f8;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detail-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1.5rem;
+}
+
+.detail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.detail-category {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-price {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.btn-buy {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 600;
+  transition: filter 0.15s ease;
+}
+
+.btn-buy:hover { filter: brightness(1.1); color: #ffffff; }
