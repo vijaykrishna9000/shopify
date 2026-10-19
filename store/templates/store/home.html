@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="catalog-hero">
+    <div class="container">
+        <h1>{{ page_title|default:"All Products" }}</h1>
+        <p>{{ products.count }} product{{ products.count|pluralize }} to browse</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <a href="{% url 'store:product_detail' product.id %}" class="product-media">
+                {% if product.discount_percentage %}
+                <span class="deal-badge">-{{ product.discount_percentage }}%</span>
+                {% endif %}
+                <img
+                    src="{% if product.img_link %}{{ product.img_link }}{% else %}https://placehold.co/400x400?text=No+Image{% endif %}"
+                    alt="{{ product.product_name }}"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x400?text=No+Image';">
+            </a>
+            <div class="product-body">
+                <a href="{% url 'store:product_detail' product.id %}" style="color: inherit;">
+                    <div class="product-name">{{ product.product_name }}</div>
+                </a>
+                {% if product.rating %}
+                <div class="product-rating">
+                    <span class="star">&#9733;</span> {{ product.rating }}
+                    {% if product.rating_count %}<span>&middot; {{ product.rating_count }}</span>{% endif %}
+                </div>
+                {% endif %}
+                <div class="product-price-row">
+                    <span class="product-price">Rs. {{ product.discounted_price }}</span>
+                    {% if product.actual_price and product.actual_price != product.discounted_price %}
+                    <span class="product-price-original">Rs. {{ product.actual_price }}</span>
+                    {% endif %}
+                </div>
+                <a href="{% url 'store:product_detail' product.id %}" class="btn-view">View</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p>No products are available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

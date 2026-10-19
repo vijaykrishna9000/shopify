@@ -1,0 +1,14 @@
+@"
+env/
+venv/
+.env
+__pycache__/
+*.pyc
+*.sqlite3
+*.log
+media/
+staticfiles/
+data.json
+serviceAccountKey.json
+debug_template.py
+"@ | Set-Content .gitignore -Encoding utf8

@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ecom
+      POSTGRES_PASSWORD: postgres
+    ports: ["5432:5432"]
+  web:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      SECRET_KEY: local-dev-key
+      DEBUG: "1"
+      DATABASE_URL: postgres://postgres:postgres@db:5432/ecom
+      RAZORPAY_KEY_ID: test
+      RAZORPAY_KEY_SECRET: test
+    depends_on: [db]

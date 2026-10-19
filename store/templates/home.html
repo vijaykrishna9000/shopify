@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">{{ page_title }}</h2>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if product.img_link %}
+                <img src="{{ product.img_link }}" class="card-img-top" alt="{{ product.product_name }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.product_name }}</h5>
+
+                    <p class="card-text">
+                        Rs. {{ product.discounted_price }}
+                        {% if product.actual_price %}
+                        <small class="text-muted">
+                            <del>Rs. {{ product.actual_price }}</del>
+                        </small>
+                        {% endif %}
+                    </p>
+
+                    {% if product.rating %}
+                    <p class="card-text">
+                        Rating: {{ product.rating }} ({{ product.rating_count }})
+                    </p>
+                    {% endif %}
+
+                    <a href="{% url 'store:product_detail' product.id %}" class="btn btn-primary">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p>No products are available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

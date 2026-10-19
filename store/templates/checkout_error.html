@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-warning">
+        <h2 class="h4">Checkout is not ready yet</h2>
+        <p class="mb-0">{{ message }}</p>
+    </div>
+    <a href="{% url 'store:product_detail' product.id %}" class="btn btn-primary">Back to Product</a>
+</div>
+{% endblock %}

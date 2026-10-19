@@ -1,0 +1,14 @@
+@"
+.git
+env/
+venv/
+.env
+__pycache__/
+*.pyc
+*.sqlite3
+*.log
+media/
+data.json
+amazon_product_details.csv
+debug_template.py
+"@ | Set-Content .dockerignore -Encoding utf8
